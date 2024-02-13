@@ -117,7 +117,8 @@ def cached_data_for_file(subsection, title, filename, func):
             return None
 
         entry = {'mtime': ondisk_mtime, 'value': value}
-        existing_cache[title] = entry
+        with cache_lock:
+            existing_cache[title] = entry
 
         dump_cache()
 
